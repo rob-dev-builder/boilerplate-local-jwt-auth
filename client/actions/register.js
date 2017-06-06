@@ -42,6 +42,7 @@ export function registerUser (creds) {
           dispatch(receiveLogin(userInfo))
         }
       }).catch(err => {
+        console.log(err.message)
         dispatch(registerError(err.response.body.message))
       })
   }

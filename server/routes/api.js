@@ -24,10 +24,12 @@ function register (req, res, next) {
         return res.status(400).send({ message: 'User exists' })
       }
       // req.login() can be used to automatically log the user in after registering
+      console.log('create user', req.body)
       users.create(req.body.username, req.body.password)
-        .then(next)
+        .then(() => next())
     })
     .catch(err => {
+      console.log('ERR', err.message)
       res.status(400).send({ message: err.message })
     })
 }

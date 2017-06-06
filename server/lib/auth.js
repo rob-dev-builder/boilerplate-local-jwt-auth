@@ -24,9 +24,11 @@ function handleError (err, req, res, next) {
 }
 
 function issueJwt (req, res, next) {
+  console.log('authenticating user')
   passport.authenticate(
     'local',
     (err, user, info) => {
+      console.log(err, user, info)
       if (err) {
         return res.status(500).json({
           message: 'Authentication failed due to a server error.'
@@ -41,6 +43,7 @@ function issueJwt (req, res, next) {
       }
 
       const token = createToken(user, process.env.JWT_SECRET)
+      console.log(token)
       res.json({
         message: 'Authentication successful.',
         token
